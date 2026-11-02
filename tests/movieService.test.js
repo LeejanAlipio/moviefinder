@@ -1,6 +1,10 @@
 import MovieService from '../src/service/movieService.js';
 
 describe("uses provider's method", () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
   const mockedProvider = {
     getMovie: jest.fn().mockResolvedValue({
       data: {
@@ -14,9 +18,9 @@ describe("uses provider's method", () => {
   const TMDBProvider = new MovieService(mockedProvider);
 
   test("calls provider's getMovie method", () => {
-    TMDBProvider.getMovie();
-    TMDBProvider.getMovie();
-    TMDBProvider.getMovie();
+    TMDBProvider.getMovie('Ant-Man');
+    TMDBProvider.getMovie('Ant-Man');
+    TMDBProvider.getMovie('Ant-Man');
 
     expect(mockedProvider.getMovie).toHaveBeenCalled();
     expect(mockedProvider.getMovie).toHaveBeenCalledTimes(3);
@@ -28,18 +32,16 @@ describe("uses provider's method", () => {
 
     expect(mockedProvider.getPopularMovies).toHaveBeenCalled();
     expect(mockedProvider.getPopularMovies).toHaveBeenCalledTimes(2);
-  })
+  });
 
   test('returns with the expected value', async () => {
-    const { data, status } = await TMDBProvider.getMovie();
+    const { data, status } = await TMDBProvider.getMovie('Ant-Man');
 
     expect(data.title).toBe('Ant-Man');
     expect(status).toBe(true);
-  })
+  });
 
   test('throw an error if title is blank', () => {
-    const result = () => TMDBProvider.getMovie('');
-
-    expect(result).toThrow();
-  })
+    expect(async () => await TMDBProvider.getMovie('')).rejects.toThrow("Title must not be blank!");
+  });
 });
