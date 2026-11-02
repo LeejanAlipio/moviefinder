@@ -36,4 +36,10 @@ describe("uses provider's method", () => {
     expect(data.title).toBe('Ant-Man');
     expect(status).toBe(true);
   })
+
+  test('throw an error if title is blank', () => {
+    const result = () => TMDBProvider.getMovie('');
+
+    expect(result).toThrow();
+  })
 });
