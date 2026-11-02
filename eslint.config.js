@@ -9,6 +9,7 @@ export default defineConfig([
     'node_modules/*',
     'dist',
     'babel.config.js',
+    'tests'
   ]),
   {
     files: ['**/*.{js,mjs,cjs}'],
