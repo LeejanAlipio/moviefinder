@@ -31,8 +31,9 @@ describe("uses provider's method", () => {
   })
 
   test('returns with the expected value', async () => {
-    const result = await TMDBProvider.getMovie();
+    const { data, status } = await TMDBProvider.getMovie();
 
-    expect(result.data.title).toBe('Ant-Man');
+    expect(data.title).toBe('Ant-Man');
+    expect(status).toBe(true);
   })
 });
