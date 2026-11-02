@@ -1,1 +1,15 @@
-Pseudocode file to think how you should approach a project.
+REQUIREMENTS
+  1. Users are able to search a movie
+    - If it exist
+      render the movie
+    - else
+      render it doesn't exist
+  2. Show popular movies by default
+
+PSEUDOCODE
+  CREATE a class `MovieService` that takes a provider
+    - create a method that calls the provider's method to search for movies
+    - create a method that calls the provider's method to search for popular movies
+  CREATE a class `TMDBProvider`
+    - create a method that fetches the user's input movie
+    - create a method that fetches the popular movies
