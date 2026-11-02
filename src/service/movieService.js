@@ -4,6 +4,10 @@ export default class MovieService {
   }
 
   async getMovie(title) {
+    if (!title.trim()) {
+      throw new Error('Title must not be blank!');
+    }
+    
     return await this.serviceProvider.getMovie(title);
   }
 
