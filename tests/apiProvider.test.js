@@ -27,4 +27,16 @@ describe('test fecth api dependency', () => {
 
     await expect(provider.getMovie("pogiako123")).resolves.toEqual(expectedData);
   })
+
+  test('throw error if fetch failed', async () => {
+    const spy = jest.spyOn(global, 'fetch').mockResolvedValue({
+      ok: false,
+      status: 400,
+    })
+
+    await expect(provider.getMovie('pogiako123')).rejects.toThrow();
+
+    expect(spy).toHaveBeenCalled();
+    ;
+  })
 })
